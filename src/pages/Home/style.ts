@@ -1,15 +1,14 @@
 import styled from 'styled-components/native';
 export const Container = styled.View`
-  flex: 1;
-  background-color: blue;
+  display: flex;
+
   justify-content: flex-start;
   align-items: center;
-  padding-top: 50px;
-
+  padding: 50px 16px 0 16px;
 `;
 
 export const Input = styled.TextInput`
-  width: 90%;
+  width: 100%;
   height: 50px;
   background-color: #fff;
   border-radius: 10px;
@@ -19,7 +18,7 @@ export const Input = styled.TextInput`
 `;
 
 export const ButtonInput = styled.TouchableOpacity`
-  width: 50%;
+  width: 100%;
   height: 50px;
   background-color: #fff;
   border-radius: 10px;

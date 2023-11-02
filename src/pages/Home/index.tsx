@@ -1,4 +1,4 @@
-import {Text } from 'react-native';
+import { Text } from 'react-native';
 import { StatusBar } from 'expo-status-bar';
 import { useState } from 'react';
 import { TCep, TPoke } from '../../types';
@@ -49,7 +49,6 @@ function Home() {
   return (
     <Container>
       <StatusBar style="dark" />
-      <Text>CEP</Text>
       <Input
         onChangeText={handleCepChange}
         placeholder="CEP"

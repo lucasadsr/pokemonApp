@@ -1,5 +1,6 @@
 import { TCep } from "../../types";
 import { Text } from 'react-native';
+import { LocationContainer, LocationInfo } from "./style";
 
 type propsCep = {
   data: TCep;
@@ -7,16 +8,13 @@ type propsCep = {
 
 
 function Location(props: propsCep) {
-  return ( 
-    <>
-     <Text>local</Text> 
-      <Text>{props.data.logradouro}</Text>
-      <Text>{props.data.bairro}</Text>
-      <Text>{props.data.localidade}</Text>
-      <Text>{props.data.uf}</Text>
-
-    </>
-   );
+  return (
+    <LocationContainer>
+      <LocationInfo>
+        {props.data.logradouro}, {props.data.bairro} - {props.data.localidade}-{props.data.uf}
+      </LocationInfo>
+    </LocationContainer>
+  );
 }
 
 export default Location;
