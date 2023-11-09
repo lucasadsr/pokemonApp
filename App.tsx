@@ -17,7 +17,7 @@ export default function App() {
       <Tab.Screen name="Home" component={Home} options={{
         title: 'Search',
         headerShown: false,
-        tabBarIcon: ({color, size}) => (
+        tabBarIcon: ({color, size}: {color: string, size: number}) => (
           <Ionicons name="search" color={color} size={size}/>
         )
       }}/>
@@ -25,7 +25,7 @@ export default function App() {
       <Tab.Screen name="Battle" component={Battle} options={{
         title: 'Battle',
         headerShown: false,
-        tabBarIcon: ({color, size}) => (
+        tabBarIcon: ({color, size}: {color: string, size: number}) => (
           <Ionicons name="flash-outline" color={color} size={size}/>
         )
       }}/>
@@ -33,7 +33,7 @@ export default function App() {
       <Tab.Screen name="Pokedex" component={Pokedex} options={{
         title: 'Pokedex',
         headerShown: false,
-        tabBarIcon: ({color, size}) => (
+        tabBarIcon: ({color, size}: {color: string, size: number}) => (
           <Ionicons name="desktop-outline" color={color} size={size}/>
         )
       }}/>
