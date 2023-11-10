@@ -1,5 +1,5 @@
 import { Text, View, Button, Image } from 'react-native';
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useContext } from 'react';
 import { Camera, CameraType } from 'expo-camera';
 import {
   CameraComponent,
@@ -9,38 +9,54 @@ import {
 } from '../Battle/style';
 import Ionicons from '@expo/vector-icons/Ionicons';
 import { fetchRandomPokemon } from '../../services';
-
-interface Pokemon {
-  name: string;
-  image: string;
-  abilities: number;
-  weight: number;
-  height: number;
-}
-{
-}
+import { PokemonContext } from '../../contexts/Pokemon';
+import Pokemon from '../../components/Pokemon';
 
 function Battle() {
+  const { handleNewPokemon, tab1Pokemon, tab2Pokemon } = useContext(PokemonContext)
   const [type, setType] = useState(CameraType.back);
   const [permission, requestPermission] = Camera.useCameraPermissions();
   const [buttonClicked, setButtonClicked] = useState(false);
-  const [pokemon, setPokemon] = useState<Pokemon>();
 
   useEffect(() => {
     async function fetchData() {
       const response = await fetchRandomPokemon();
       const pokemon = {
+        id: response.id,
         name: response.name,
         image: response.sprites.front_default || '',
         abilities: response.abilities.length,
         weight: response.weight,
-        height: response.height
-      };
-      console.log(pokemon);
-      setPokemon(pokemon as Pokemon);
+        height: response.height,
+        sprites: response.sprites,
+      }
+
+      handleNewPokemon({ tab: 'tab2', pokemon: pokemon })
     }
-    fetchData();
+    try {
+      fetchData();
+    } catch (err) {
+      console.log(err)
+    }
   }, []);
+
+  function handleCheckBattleResult() {
+    if (tab1Pokemon && tab2Pokemon) {
+      if (tab1Pokemon.abilities === tab2Pokemon.abilities) {
+        return 'draw'
+      }
+
+      if (tab1Pokemon.abilities < tab2Pokemon.abilities) {
+        return 'win'
+      }
+
+      if (tab1Pokemon.abilities > tab2Pokemon.abilities) {
+        return 'lost'
+      }
+    }
+  }
+
+  const battleResult = handleCheckBattleResult()
 
   if (!permission) {
     return <View />;
@@ -66,17 +82,8 @@ function Battle() {
   return (
     <Container>
       <Text>Battle</Text>
-      <View>
-        <Text>Ganhou | Perdeu | Empate </Text>
-      </View>
-      <Text>{pokemon?.name}</Text>
-      <Image
-        source={{ uri: pokemon?.image }}
-        style={{ width: 250, height: 300 }}
-      />
-      <Text>weight: {pokemon?.weight}</Text>
-      <Text>height: {pokemon?.height}</Text>
-      <Text>abilities: {pokemon?.abilities}</Text>
+
+      {tab2Pokemon ? <Pokemon data={tab2Pokemon} battleResult={battleResult} /> : ''}
 
       <ButtonCamera onPress={() => setButtonClicked(prevState => !prevState)}>
         <Ionicons name="camera-outline" size={40} color={'#000'}></Ionicons>

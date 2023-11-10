@@ -15,10 +15,14 @@ export const PokemonContainer = styled.View`
   background-color: #FFD700;
 `
 
-export const PokemonPicture = styled.Image`
+export const PokemonPictureContainer = styled.View`
   margin: 16px 0;
   background-color: lightblue;
   border-radius: 15px;
+`
+
+export const PokemonPicture = styled.Image`
+  /* border: 1px solid red; */
 `
 
 export const NoImageText = styled.Text`
@@ -27,9 +31,10 @@ export const NoImageText = styled.Text`
 `
 
 export const Name = styled.Text`
+  text-align: center;
   font-size: 32px;
   text-transform: capitalize;
-  color: #E4404F;
+  color: #000;
   font-weight: 700;
 `
 
@@ -43,4 +48,11 @@ export const Status = styled.Text`
   color: #4169E1;
   border-bottom-width: 1px;
   border-bottom-color: rgba(0, 0, 0, 0.2); /* Cor da linha separadora */
+`
+
+export const BattleResult = styled.Text`
+  text-align: center;
+  font-size: 18px;
+  text-transform: capitalize;
+  color: #000;
 `

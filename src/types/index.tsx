@@ -13,6 +13,6 @@ export type TPoke = {
   name: string;
   weight: number;
   height: number;
-  abilities: PokemonAbility[]; 
-  sprites: PokemonSprites; 
+  abilities: number;
+  sprites: PokemonSprites;
 };
